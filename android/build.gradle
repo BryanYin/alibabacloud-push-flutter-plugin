@@ -41,17 +41,20 @@ android {
     defaultConfig {
         minSdkVersion 19
     }
+    namespace = 'com.aliyun.ams.push'
 }
 
-dependencies {
-    api 'com.aliyun.ams:alicloud-android-push:3.8.7'
+def ali3rdPushVersion = '3.9.2'
 
-    api "com.aliyun.ams:alicloud-android-third-push:3.8.7"
-    api "com.aliyun.ams:alicloud-android-third-push-meizu:3.8.7"
-    api "com.aliyun.ams:alicloud-android-third-push-vivo:3.8.7"
-    api "com.aliyun.ams:alicloud-android-third-push-oppo:3.8.7"
-    api "com.aliyun.ams:alicloud-android-third-push-xiaomi:3.8.7"
-    api "com.aliyun.ams:alicloud-android-third-push-huawei:3.8.7"
-    api "com.aliyun.ams:alicloud-android-third-push-honor:3.8.7"
-    api 'com.aliyun.ams:alicloud-android-third-push-fcm:3.8.7'
+dependencies {
+    api "com.aliyun.ams:alicloud-android-push:$ali3rdPushVersion"
+
+    api "com.aliyun.ams:alicloud-android-third-push:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-meizu:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-vivo:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-oppo:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-xiaomi:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-huawei:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-honor:$ali3rdPushVersion"
+    api "com.aliyun.ams:alicloud-android-third-push-fcm:$ali3rdPushVersion"
 }

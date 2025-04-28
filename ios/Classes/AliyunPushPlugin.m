@@ -2,7 +2,6 @@
 #import <CloudPushSDK/CloudPushSDK.h>
 // iOS 10 notification
 #import <UserNotifications/UserNotifications.h>
-#import <AlicloudUtils/AlicloudUtils.h>
 
 
 @interface AliyunPushLog : NSObject
@@ -226,7 +225,7 @@ static BOOL logEnable = NO;
 }
 
 - (BOOL)isNetworkReachable {
-    return [[AlicloudReachabilityManager shareInstance] checkInternetConnection];
+    return YES;
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
@@ -307,7 +306,7 @@ static BOOL logEnable = NO;
     [self registerAPNS];
     
     //初始化
-    [CloudPushSDK asyncInit:appKey appSecret:appSecret callback:^(CloudPushCallbackResult *res) {
+    [CloudPushSDK startWithAppkey:appKey appSecret:appSecret callback:^(CloudPushCallbackResult *res) {
         if (res.success) {
             PushLogD(@"Push SDK init success, deviceId: %@.", [CloudPushSDK getDeviceId]);
             result(@{KEY_CODE:CODE_SUCCESS});
@@ -356,10 +355,10 @@ static BOOL logEnable = NO;
  *    处理到来推送消息
  */
 - (void)onMessageReceived:(NSNotification *)notification {
-    CCPSysMessage *message = [notification object];
+    NSDictionary *data = [notification object];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:message.title forKey:@"title"];
-    [dic setValue:message.body forKey:@"body"];
+    [dic setValue:data[@"title"] forKey:@"title"];
+    [dic setValue:data[@"content"] forKey:@"body"];
     [self.channel invokeMethod:@"onMessage" arguments:dic];
 }
 
