@@ -1,6 +1,6 @@
+import 'package:aliyun_push/aliyun_push.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:aliyun_push/aliyun_push.dart';
 import 'package:push_example/base_state.dart';
 
 class AndroidPage extends StatefulWidget {
@@ -136,7 +136,6 @@ class _AndroidPageState extends BaseState<AndroidPage> {
                 .then((createResult) {
               var code = createResult['code'];
               if (code == kAliyunPushSuccessCode) {
-
                 showOkDialog('创建$channel通道成功');
               } else {
                 var errorCode = createResult['code'];
@@ -223,9 +222,11 @@ class _AndroidPageState extends BaseState<AndroidPage> {
               _selectedLogLevel = value as String;
             });
           },
-          buttonHeight: 40,
-          buttonWidth: 140,
-          itemHeight: 40,
+          buttonStyleData: const ButtonStyleData(height: 40, width: 140),
+          menuItemStyleData: const MenuItemStyleData(height: 40),
+          // buttonHeight: 40,
+          // buttonWidth: 140,
+          // itemHeight: 40,
         ),
       ),
     ));

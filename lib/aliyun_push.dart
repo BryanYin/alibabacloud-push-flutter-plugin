@@ -124,15 +124,14 @@ class AliyunPush {
   ///注册推送
   Future<Map<dynamic, dynamic>> initPush(
       {String? appKey, String? appSecret}) async {
-    if (Platform.isIOS) {
-      Map<dynamic, dynamic> initResult = await methodChannel.invokeMethod(
-          'initPushSdk', {'appKey': appKey, 'appSecret': appSecret});
-      return initResult;
+    Map<dynamic, dynamic> initResult;
+    if (Platform.isAndroid) {
+      initResult = await methodChannel.invokeMethod('initPush');
     } else {
-      Map<dynamic, dynamic> initResult =
-          await methodChannel.invokeMethod('initPush');
-      return initResult;
+      initResult = await methodChannel.invokeMethod(
+          'initPushSdk', {'appKey': appKey, 'appSecret': appSecret});
     }
+    return initResult;
   }
 
   ///注册厂商通道

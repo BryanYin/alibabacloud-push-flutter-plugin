@@ -1,0 +1,14 @@
+{
+  "name": "aliyun_push",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aliyun/push": "^1.2.3",
+    "@ohos/flutter_ohos": "file:./har/flutter.har"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "aliyun_push",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}
