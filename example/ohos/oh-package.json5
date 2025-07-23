@@ -11,7 +11,7 @@
     "@ohos/hypium": "1.0.6"
   },
   "overrides": {
-    "aliyun_push": "../../ohos",
+    "aliyun_push": "file:./har/aliyun_push.har",
     "@ohos/flutter_module": "file:./entry",
     "@ohos/flutter_ohos": "file:./har/flutter.har"
   }

@@ -25,6 +25,7 @@ import { pushService } from '@kit.PushKit';
 import Want from '@ohos.app.ability.Want';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { notificationManager } from '@kit.NotificationKit';
 
 /** AliyunPushPlugin **/
 export default class AliyunPushPlugin implements FlutterPlugin, MethodCallHandler, AbilityAware, NewWantListener, IPushListener, PushNotificationHandler {
@@ -72,6 +73,8 @@ export default class AliyunPushPlugin implements FlutterPlugin, MethodCallHandle
       this.addAlias(call, result)
     } else if (call.method == "removeAlias") {
       this.removeAlias(call, result)
+    } else if (call.method == "setBadgeNum"){
+      this.setBadgeNum(call,result)
     } else {
       console.error("调用方法：" + call.method + " 未实现")
       result.notImplemented()
@@ -151,8 +154,8 @@ export default class AliyunPushPlugin implements FlutterPlugin, MethodCallHandle
 
   ///////////// EMAS 接口
   private async initPushSdk(call: MethodCall, result: MethodResult) {
-    let appKey: string = call.argument('appKey')
-    let appSecret: string = call.argument('appSecret')
+    let appKey: string|null = call.argument('appKey')
+    let appSecret: string|null = call.argument('appSecret')
 
     let map: Map<string, string> = new Map()
     if (!appKey || !appSecret) {
@@ -233,7 +236,7 @@ export default class AliyunPushPlugin implements FlutterPlugin, MethodCallHandle
 
   private addAlias(call: MethodCall, result: MethodResult) {
     let map: Map<string, string> = new Map();
-    let alias: string = call.argument('alias');
+    let alias: string|null = call.argument('alias');
 
     if (!alias) {
       this.paramError(map, "alias can not be empty", result)
@@ -247,7 +250,7 @@ export default class AliyunPushPlugin implements FlutterPlugin, MethodCallHandle
 
   private removeAlias(call: MethodCall, result: MethodResult) {
     let map: Map<string, string> = new Map();
-    let alias: string = call.argument('alias');
+    let alias: string|null = call.argument('alias');
 
     if (!alias) {
       this.paramError(map, "alias can not be empty", result)
@@ -256,6 +259,20 @@ export default class AliyunPushPlugin implements FlutterPlugin, MethodCallHandle
 
     aliyunPush.removeAlias(alias, (err) => {
       this.aliyunError(map, result, err)
+    })
+  }
+
+  private setBadgeNum(call:MethodCall,result:MethodResult){
+    let map: Map<string, string> = new Map();
+    let num:number|null = call.argument("badgeNum")
+
+    if(num == null){
+      this.paramError(map,"badge num can not be empty",result)
+      return
+    }
+
+    notificationManager.setBadgeNumber(num,()=>{
+      this.success(map,result)
     })
   }
 }

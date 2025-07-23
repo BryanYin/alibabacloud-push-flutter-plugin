@@ -282,6 +282,12 @@ class AliyunPush {
     return result;
   }
 
+  Future<Map<dynamic, dynamic>> setBadgeNum(int num) async {
+    Map<dynamic, dynamic> result =
+        await methodChannel.invokeMethod('setBadgeNum', {'badgeNum': num});
+    return result;
+  }
+
   ///清除所有通知
   Future<Map<dynamic, dynamic>> clearNotifications() async {
     if (!Platform.isAndroid) {
@@ -387,16 +393,6 @@ class AliyunPush {
     }
     Map<dynamic, dynamic> result = await methodChannel
         .invokeMethod('showNoticeWhenForeground', {'enable': enable});
-    return result;
-  }
-
-  Future<Map<dynamic, dynamic>> setIOSBadgeNum(int num) async {
-    if (!Platform.isIOS) {
-      return {'code': kAliyunPushOnlyIOS, 'errorMsg': 'Only support iOS'};
-      ;
-    }
-    Map<dynamic, dynamic> result =
-        await methodChannel.invokeMethod('setBadgeNum', {'badgeNum': num});
     return result;
   }
 

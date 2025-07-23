@@ -15,7 +15,6 @@ class _IOSPageState extends BaseState<IOSPage> {
   final TextEditingController _badgeController = TextEditingController();
 
   String _apnsToken = "";
-  
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +81,7 @@ class _IOSPageState extends BaseState<IOSPage> {
               return;
             }
             int badgeNum = int.parse(_badgeController.text);
-            _aliyunPush.setIOSBadgeNum(badgeNum).then((result) {
+            _aliyunPush.setBadgeNum(badgeNum).then((result) {
               var code = result['code'];
               if (code == kAliyunPushSuccessCode) {
                 showOkDialog('设置角标个数$badgeNum成功');
