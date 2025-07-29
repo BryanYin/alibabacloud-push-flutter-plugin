@@ -41,7 +41,7 @@
     },
     {
       "name": "aliyun_push",
-      "srcPath": "./../../ohos"
+      "srcPath": "../../ohos"
     }
   ]
 }

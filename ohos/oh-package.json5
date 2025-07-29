@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@aliyun/push": "^1.2.3",
-    "@ohos/flutter_ohos": "file:./har/flutter.har"
+    "@ohos/flutter_ohos": "file:../example/ohos/har/flutter.har"
   },
   "devDependencies": {},
   "dynamicDependencies": {}
